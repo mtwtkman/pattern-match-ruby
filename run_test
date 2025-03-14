@@ -6,7 +6,7 @@ bundle
 
 for testcase in $(ls test)
 do
-  if [[ ${target} && ${testcase} != ${target} ]];then
+  if [ "${target}" ] && [ "${testcase}" != "${target}" ];then
     continue
   fi
   echo "TEST: ${testcase}"
