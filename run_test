@@ -1,0 +1,22 @@
+#!/bin/sh
+
+target=${TARGET:-}
+
+bundle
+
+for testcase in $(ls test)
+do
+  if [[ ${target} && ${testcase} != ${target} ]];then
+    continue
+  fi
+  echo "TEST: ${testcase}"
+  bundle exec ruby ./test/${testcase}
+  if [ $? = 0 ]; then
+    echo -e "\e[32mPASSED\e[0m"
+    continue
+  fi
+  echo -e "\e[31m;FAILED\e[0m"
+  exit 1
+done
+
+echo -e "\e[33mALL PASSED\e[0m"
